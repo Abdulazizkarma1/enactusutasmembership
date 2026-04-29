@@ -143,6 +143,7 @@ export default function LoginPage() {
           animation: 'loginFadeIn 0.5s ease both',
         }}
       >
+        
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div
             style={{
