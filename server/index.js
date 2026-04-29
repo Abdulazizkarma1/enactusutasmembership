@@ -27,6 +27,20 @@ app.use(express.json());
 
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
+app.get('/', (req, res) => {
+  res.json({ 
+    status: 'Enactus Verify API running', 
+    port: PORT,
+    corsOrigin: CLIENT_URL,
+    endpoints: [
+      '/api/auth/login (POST)',
+      '/api/auth/me (GET)',
+      '/api/members (GET/POST)',
+      '/api/verify/:token (GET public)'
+    ]
+  });
+});
+
 app.use('/api/auth', authRoutes);
 
 function formatMember(doc) {
