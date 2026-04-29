@@ -13,7 +13,7 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
-const CLIENT_URL = (process.env.CLIENT_URL || 'http://localhost:3000').replace(/\/$/, '');
+const CLIENT_URL = (process.env.CLIENT_URL || 'http://localhost:3000', 'https://enactusutasmembership.netlify.app').replace(/\/$/, '');
 const PORT = Number(process.env.PORT) || 5000;
 
 app.use(
