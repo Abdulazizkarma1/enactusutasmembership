@@ -1,0 +1,26 @@
+{
+  "root": "client/build/",
+  "routes": {
+    "/**": {
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "X-Frame-Options": "DENY"
+      }
+    }
+  },
+  "rewrites": [
+    {
+      "source": "**",
+      "destination": "/index.html"
+    }
+  ],
+  "clean_urls": true,
+  "routes": {
+    "/api/**": {
+      "status_code": 307,
+      "headers": {
+        "Location": "https://enactus-verify-api.onrender.com/api/"
+      }
+    }
+  }
+}
