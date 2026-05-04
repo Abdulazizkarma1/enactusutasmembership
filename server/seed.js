@@ -11,6 +11,7 @@ async function seedAdmin() {
     process.exit(1);
   }
 
+  const reset = process.argv.includes('--reset');
   const emailRaw = process.env.ADMIN_EMAIL;
   const password = process.env.ADMIN_PASSWORD;
 
@@ -25,17 +26,23 @@ async function seedAdmin() {
     await mongoose.connect(uri);
     console.log('Connected to MongoDB for seeding');
 
+    if (reset) {
+      await Admin.deleteMany({});
+      console.log('All admins deleted (--reset mode)');
+    }
+
     const existing = await Admin.findOne({ email });
     if (existing) {
       console.log(`Admin ${email} already exists. Skipping creation (idempotent).`);
     } else {
       const passwordHash = await bcrypt.hash(password, 12);
+      const username = email.split('@')[0] || 'admin';
       await Admin.create({
-        username: email.split('@')[0] || 'admin',
+        username,
         email,
         passwordHash,
       });
-      console.log(`Default admin created: ${email}`);
+      console.log(`Admin created: ${email} (${username})`);
     }
   } catch (err) {
     console.error('Seed error:', err.message || err);
