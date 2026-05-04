@@ -25,6 +25,7 @@ export default function App() {
         </Route>
 
         <Route path="/" element={<Navigate to="/admin" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </BrowserRouter>
   );
