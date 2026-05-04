@@ -1,7 +1,7 @@
 services:
   # Backend Web Service
   - type: web
-    name: enactus-verify-api
+    name: enactusutasmembership
     env: node
     rootDir: server/
     buildCommand: npm install
@@ -10,18 +10,24 @@ services:
       - key: CLIENT_URL
         fromService:
           type: web
-          name: enactus-verify-web
+          name: enactusutasmembers
           property: url
       - key: MONGODB_URI
         sync: false  # Set manually to Atlas URI
 
   # Frontend Static Site
   - type: web
-    name: enactus-verify-web
+    name: enactusutasmembers
     env: static
     rootDir: client/
     buildCommand: npm install && npm run build
     outputDir: build/
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: enactusutasmembership
+          property: url
     headers:
       - path: /*
         headers:
