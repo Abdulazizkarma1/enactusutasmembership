@@ -22,27 +22,27 @@ async function req(path, opts = {}) {
 
 export const api = {
   login: (email, password) =>
-    req('/api/auth/login', {
+    req('/auth/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
     }),
 
-  logout: () => req('/api/auth/logout', { method: 'POST' }),
+  logout: () => req('/auth/logout', { method: 'POST' }),
 
-  me: () => req('/api/auth/me'),
+  me: () => req('/auth/me'),
 
-  getMembers: () => req('/api/members'),
-  getMember: (id) => req(`/api/members/${encodeURIComponent(id)}`),
-  verifyToken: (token) => req(`/api/verify/${encodeURIComponent(token)}`),
+  getMembers: () => req('/members'),
+  getMember: (id) => req(`/members/${encodeURIComponent(id)}`),
+  verifyToken: (token) => req(`/verify/${encodeURIComponent(token)}`),
   createMember: (data) =>
-    req('/api/members', { method: 'POST', body: JSON.stringify(data) }),
+    req('/members', { method: 'POST', body: JSON.stringify(data) }),
   updateMember: (id, data) =>
-    req(`/api/members/${encodeURIComponent(id)}`, {
+    req(`/members/${encodeURIComponent(id)}`, {
       method: 'PUT',
       body: JSON.stringify(data),
     }),
   deleteMember: (id) =>
-    req(`/api/members/${encodeURIComponent(id)}`, { method: 'DELETE' }),
-  getQR: (id) => req(`/api/members/${encodeURIComponent(id)}/qr`),
-  getStats: () => req('/api/stats'),
+    req(`/members/${encodeURIComponent(id)}`, { method: 'DELETE' }),
+  getQR: (id) => req(`/members/${encodeURIComponent(id)}/qr`),
+  getStats: () => req('/stats'),
 };
